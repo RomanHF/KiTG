@@ -118,7 +118,7 @@ def get_matrix(func):
     for i in range(1, len(M) + 1):
         matrix[i][0] = M[i - 1]
     for i in matrix:
-        form = '{:5}' * len(M)
+        form = '{:5}' * (len(M)+1)
         print(form.format(*i))
 
 
