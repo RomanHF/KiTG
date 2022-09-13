@@ -2,35 +2,33 @@ def F1(x, y):
     global M
     for z in M:
         if (x - z) * (y - z) < 0:
-            print(x, y)
             return 1
-        return 0
+    return 0
 
 
 def F2(x, y):
-    """x = [int(i) for i in str(x)]
+    global M
+    x = [int(i) for i in str(x)]
     y = [int(i) for i in str(y)]
     for i in range(len(x)):
         if x[i]<y[i]:
-            return 0"""
-    global M
-    if x < y:
-        return 0
+            return 0
     return 1
+
 
 
 def F3(x, y):
     global M
-    if x / 5 == y / 5:
+    if (x / 5)//1 == (y / 5)//1:
         return 1
     return 0
 
 
 def F4(x, y):
     global M
-    if (x ^ 2 - y ^ 3) % 2 == 1:
-        return 1
-    return 0
+    if (x ** 2 - y ** 3) % 2 == 0:
+        return 0
+    return 1
 
 
 def F5(x, y):
@@ -100,7 +98,7 @@ def tranz_check(func):
     for a in M:
         for b in M:
             for c in M:
-                if func(a, b) == 1 and func(b, c) == 1 and func(a, c) == 0:
+                if func(a, b) == 1 and func(b, c) == 1 and func(a, c) == 0 and a!=c:#ПОПРОБУЙТЕ УДАЛИТЬ a!=c если ТРАНЗИТИВНО ПОКАЖЕТ
                     print(f"{func.__name__}  не транзитивно. Контрпример {a, b, c}")
                     return 0
     print(f"{func.__name__} транзитивно")
@@ -109,7 +107,7 @@ def tranz_check(func):
 
 def get_matrix(func):
     global M
-    matrix = [[i for i in range(len(M) + 1)] for i in range(len(M) + 1)]
+    matrix = [[i for i in range(len(M) + 1)] for _ in range(len(M) + 1)]
     for i in range(len(M)):
         for j in range(len(M)):
             matrix[i + 1][j + 1] = func(M[i], M[j])
